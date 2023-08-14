@@ -1,0 +1,6 @@
+github.com/CherkashinEvgeny/gotx/base v1.0.0-alpha-1779e3d89bf9240643d9ea184fd8e7ff46a0b169 h1:f0yesDvBUhHyBQ/3TXmjouU96I+NNpZTlhu613McCLo=
+github.com/CherkashinEvgeny/gotx/base v1.0.0-alpha-1779e3d89bf9240643d9ea184fd8e7ff46a0b169/go.mod h1:FIPSpcWojOpsntDAdX1WgNNmyGFZTQQGE1X2NF2zS74=
+github.com/go-sql-driver/mysql v1.6.0/go.mod h1:DCzpHaOWr8IXmIStZouvnhqoel9Qv2LBy8hT2VhHyBg=
+github.com/jmoiron/sqlx v1.3.5/go.mod h1:nRVWtLre0KfCLJvgxzCsLVMogSvQ1zNJtpYr2Ccp0mQ=
+github.com/lib/pq v1.2.0/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
+github.com/mattn/go-sqlite3 v1.14.6/go.mod h1:NyWgC/yNuGj7Q9rpYnZvas74GogHl5/Z4A/KQRfk6bU=
