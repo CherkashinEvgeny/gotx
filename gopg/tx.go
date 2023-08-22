@@ -2,9 +2,9 @@ package sql
 
 import (
 	"context"
-	"github.com/go-pg/pg/v10"
 
 	"github.com/CherkashinEvgeny/gotx/base"
+	"github.com/go-pg/pg/v10"
 )
 
 type baseTx struct {

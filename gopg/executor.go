@@ -2,9 +2,10 @@ package sql
 
 import (
 	"context"
+	"io"
+
 	"github.com/go-pg/pg/v10"
 	"github.com/go-pg/pg/v10/orm"
-	"io"
 )
 
 type Executor interface {

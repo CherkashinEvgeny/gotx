@@ -3,9 +3,9 @@ package sql
 import (
 	"context"
 	"database/sql"
-	"github.com/jmoiron/sqlx"
 
 	"github.com/CherkashinEvgeny/gotx/base"
+	"github.com/jmoiron/sqlx"
 )
 
 type baseTx struct {

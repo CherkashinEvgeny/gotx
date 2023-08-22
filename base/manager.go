@@ -22,7 +22,7 @@ func New(key any, db Db, options ...Option) (manager Manager) {
 func (m Manager) Transactional(ctx context.Context, f func(ctx context.Context) (err error), options ...Option) (err error) {
 	tx := m.extractTxFromContext(ctx)
 	options = extend(nil, m.options, options)
-	tx, err = m.db.Tx(ctx, tx, options)
+	tx, err = m.db.Begin(ctx, tx, options)
 	if err != nil {
 		return BeginError{err}
 	}
@@ -45,7 +45,7 @@ func (m Manager) transactional(ctx context.Context, tx Tx, f func(ctx context.Co
 	if err != nil {
 		rollbackErr := tx.Rollback(ctx)
 		if rollbackErr != nil {
-			return RollbackError{rollbackErr, err}
+			return RollbackError{err, rollbackErr}
 		}
 		return err
 	}
@@ -58,10 +58,10 @@ func (m Manager) transactional(ctx context.Context, tx Tx, f func(ctx context.Co
 
 func (m Manager) Executor(ctx context.Context) (executor any) {
 	tx := m.extractTxFromContext(ctx)
-	if tx == nil {
-		return m.db.Executor()
+	if tx != nil {
+		return tx.Executor()
 	}
-	return tx.Executor()
+	return m.db.Executor()
 }
 
 func (m Manager) extractTxFromContext(ctx context.Context) (tx Tx) {

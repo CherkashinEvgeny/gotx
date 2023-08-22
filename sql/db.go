@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+
 	"github.com/CherkashinEvgeny/gotx/base"
 )
 
@@ -24,6 +25,8 @@ func (d *baseDb) Tx(ctx context.Context, tx base.Tx, options base.Options) (newT
 	return d.propagation(options)(ctx, tx, options)
 }
 
+var LevelDefault = sql.LevelReadCommitted
+
 func (d *baseDb) checkIsolation(oldTx base.Tx, options base.Options) (err error) {
 	var txLevel sql.IsolationLevel
 	tx := oldTx
@@ -35,12 +38,14 @@ func (d *baseDb) checkIsolation(oldTx base.Tx, options base.Options) (err error)
 		}
 		tx = tx.Parent()
 	}
+	if txLevel == sql.LevelDefault {
+		txLevel = LevelDefault
+	}
 	level := getIsolationLevel(options)
+	if level == sql.LevelDefault {
+		level = LevelDefault
+	}
 	if txLevel < level {
-		if txLevel == sql.LevelDefault {
-			// sql.LevelDefault is implementation specific, so skip it
-			return nil
-		}
 		return fmt.Errorf("isolation level %s is to low to handle transaction", txLevel)
 	}
 	return nil
